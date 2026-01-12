@@ -1,5 +1,6 @@
 package com.ATKC.taskapi.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -22,6 +23,8 @@ public class TaskServiceImplementation implements TaskService {
     @Override
     public Task createTask(Task task) {
 
+        task.setCreatedAt(LocalDateTime.now());
+        task.setUpdatedAt(LocalDateTime.now());
         return repository.save(task);
 
     }
@@ -50,6 +53,7 @@ public class TaskServiceImplementation implements TaskService {
     @Override
     public Task updateTask(Task task) {
 
+        task.setUpdatedAt(LocalDateTime.now());
         return repository.save(task);
 
     }
@@ -57,20 +61,13 @@ public class TaskServiceImplementation implements TaskService {
     @Override
     public boolean updateTaskStatus(Long taskID, TaskStatus newStatus) {
 
-        boolean statusUpdated = false;
-        Task newTask = getTaskByID(taskID); // get task ID
+        Task newTask = getTaskByID(taskID);
 
-        if (newTask != null) { // check if task ID exist
+        newTask.setStatus(newStatus);
+        newTask.setUpdatedAt(LocalDateTime.now());
+        repository.save(newTask);
 
-            newTask.setStatus(newStatus); // update status
-            statusUpdated = true;
-
-            // update repository
-            repository.save(newTask);
-
-        }
-
-        return statusUpdated;
+        return true;
 
     }
 

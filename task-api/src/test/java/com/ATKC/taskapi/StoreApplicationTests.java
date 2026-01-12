@@ -1,4 +1,4 @@
-package com.runtimerecords.store;
+package com.ATKC.taskapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

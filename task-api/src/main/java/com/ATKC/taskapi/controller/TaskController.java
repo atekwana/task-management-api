@@ -59,9 +59,9 @@ public class TaskController {
     }
 
     @PatchMapping("{taskID}/status")
-    public boolean updateTaskStatusEndpoints(@PathVariable("taskID") Long taskID, @RequestParam TaskStatus newStatus) {
+    public boolean updateTaskStatusEndpoints(@PathVariable("taskID") Long taskID, @RequestParam String newStatus) {
 
-        return taskService.updateTaskStatus(taskID, newStatus);
+        return taskService.updateTaskStatus(taskID, TaskStatus.valueOf(newStatus.toUpperCase()));
 
     }
 
