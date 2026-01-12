@@ -2,6 +2,9 @@ package com.ATKC.taskapi.model;
 
 import java.time.LocalDateTime;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -41,10 +44,14 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private TaskStatus status;
 
-    private LocalDateTime createdAt; // Timestamps
+    @CreatedDate
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Task() {}
+    public Task() {
+    }
 
     public Task(Long taskID, String title, String description, TaskStatus status, LocalDateTime createdAt,
             LocalDateTime updateAt) {
