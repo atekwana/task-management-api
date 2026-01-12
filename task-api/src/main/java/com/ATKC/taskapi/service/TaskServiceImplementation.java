@@ -22,8 +22,7 @@ public class TaskServiceImplementation implements TaskService {
     @Override
     public Task createTask(Task task) {
 
-        Task newTask = repository.save(task);
-        return newTask;
+        return repository.save(task);
 
     }
 
@@ -37,24 +36,21 @@ public class TaskServiceImplementation implements TaskService {
     @Override
     public List<Task> getAllTasks() {
 
-        List<Task> savedTasks = repository.findAll();
-        return savedTasks;
+        return repository.findAll();
 
     }
 
     @Override
     public Task getTaskByID(Long taskID) {
 
-        Task task = repository.findById(taskID).orElseThrow();
-        return task;
+        return repository.findById(taskID).orElseThrow();
 
     }
 
     @Override
     public Task updateTask(Task task) {
 
-        Task updatedTask = repository.save(task);
-        return updatedTask;
+        return repository.save(task);
 
     }
 
