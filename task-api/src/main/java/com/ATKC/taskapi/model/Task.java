@@ -25,7 +25,7 @@ public class Task {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ID;
+    private Long taskID;
 
     /**
      * @Column Maps field to database column, field cannot be null
@@ -44,9 +44,12 @@ public class Task {
     private LocalDateTime createdAt; // Timestamps
     private LocalDateTime updatedAt;
 
-    public Task(Long ID, String title, String description, TaskStatus status, LocalDateTime createdAt, LocalDateTime updateAt) {
+    public Task() {}
 
-        this.ID = ID;
+    public Task(Long taskID, String title, String description, TaskStatus status, LocalDateTime createdAt,
+            LocalDateTime updateAt) {
+
+        this.taskID = taskID;
         this.title = title;
         this.description = description;
         this.status = status;
@@ -55,15 +58,15 @@ public class Task {
 
     }
 
-    public Long getID() {
+    public Long getTaskID() {
 
-        return ID;
+        return taskID;
 
     }
 
-    public void setID(Long ID) {
+    public void setTaskID(Long taskID) {
 
-        this.ID = ID;
+        this.taskID = taskID;
 
     }
 
