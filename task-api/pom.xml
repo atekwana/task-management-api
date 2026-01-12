@@ -9,8 +9,8 @@
 		<relativePath/>
 		<!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.runtimerecords</groupId>
-	<artifactId>store</artifactId>
+	<groupId>com.ATKC</groupId>
+	<artifactId>task-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>store</name>
 	<description>Demo project for Spring Boot</description>
