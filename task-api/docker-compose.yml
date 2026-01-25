@@ -1,0 +1,42 @@
+services:
+  taskdb:
+    image: mysql:8.0
+    container_name: task-db
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: taskdb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - task-network
+    healthcheck: # addresses the issue where the API container started too fast and tried to connect to MySQL before MySQL was ready to accept connections
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .
+    container_name: task-api
+    ports:
+      - "8080:8080"
+    environment:
+      # IMPORTANT: use the service name 'taskdb' in the connection URL
+      SPRING_DATASOURCE_URL: jdbc:mysql://taskdb:3306/taskdb
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin
+    depends_on:
+      - taskdb
+    networks:
+      - task-network
+
+volumes:
+  mysql-data: {}
+
+networks:
+  task-network:
+    driver: bridge
